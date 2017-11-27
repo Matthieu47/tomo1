@@ -6,9 +6,7 @@ NAME	=	Tomo
 
 RM	=	rm -f
 
-# CFLAGS	=	-lm -I./Inc -O3
 CFLAGS	=	-I./Inc -O3
-
 
 CC	=	gcc
 
