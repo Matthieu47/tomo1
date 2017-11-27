@@ -1,5 +1,7 @@
 #include "my.h"
 
+/* A TESTER INTEGRALEMENT -> segfault */
+
 // A TESTER
 // Verifie si coloriage verifie la sequence de la ligne
 int compare_seq_ligne(tGrille *grille, int ligne){
