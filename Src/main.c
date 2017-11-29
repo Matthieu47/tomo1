@@ -12,11 +12,15 @@ int main(int ac, char **av){
 
     if (ac<2)
 	return my_err("Usage : ./Tomo file");
-    if ((grille = init_grille(av[1])) == NULL)
+    grille = init_grille(av[1]);
+    if (grille == NULL)
 	return my_err("Grille init failed");
-    /* call de enumeration a refaire (?) */
-    /* if (enumeration(grille, grille->nb_Col*grille->nb_Lig, BLANC) == FALSE) */
-    /* 	return my_err("Pas pu colorier =("); */
+
+    int ret =  enumeration(grille, 0, BLANC);
+    int ret2 = enumeration(grille, 0, NOIR);
+    
+    if(ret == FALSE && ret2 == FALSE)
+       return my_err("Pas pu colorier =("); 
     return 0;
 }
 
