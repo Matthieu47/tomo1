@@ -20,7 +20,7 @@ static void show_seq(int **sequence, int size, char type){
 
 void showGrille(tGrille *grille){
     int i,n;
-    printf("Matrice a %d lignes, %d colonnes :\n", grille->nb_Lig, grille->nb_Col);
+    printf("\tMatrice a %d lignes, %d colonnes :\n", grille->nb_Lig, grille->nb_Col);
     for (i=0 ; i<grille->nb_Lig ; i++){
 	for (n=0 ; n<grille->nb_Col ; n++)
 	    printf("%d ", grille->matrice[i][n]);
