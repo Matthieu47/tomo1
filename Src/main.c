@@ -16,11 +16,16 @@ int main(int ac, char **av){
   if (grille == NULL)
     return my_err("Grille init failed");
 
-  int ret =  enumeration(grille, 0, BLANC);
-  int ret2 = enumeration(grille, 0, NOIR);
+  if (TestVecteurLigne(grille, 2) == TRUE)
+    printf("Possible\n");
+  else
+    printf("Imossible\n");
   
-  showGrille(grille);
-    
+  /* int ret =  enumeration(grille, 0, BLANC); */
+  /* int ret2 = enumeration(grille, 0, NOIR); */
+  
+  /* showGrille(grille); */
+  
   /* if(ret == FALSE && ret2 == FALSE) */
   /*   return my_err("Pas pu colorier =("); */
   return 0;

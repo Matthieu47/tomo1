@@ -32,6 +32,23 @@ void showGrille(tGrille *grille){
     show_seq(grille->seqCol, grille->nb_Col, 'C');
 }
 
+/* GETTER */
+int nb_seqLig(int ligne, tGrille *grille){
+  int i = 0;
+
+  while (grille->seqLig[ligne][i] != -1)
+    i++;
+  return i;
+}
+
+int nb_seqCol(int col, tGrille *grille){
+  int i = 0;
+
+  while (grille->seqLig[col][i] != -1)
+    i++;
+  return i;
+}
+
 /* INITIALISATION STRUCTURE */
 
 static void *my_err(char *msg){

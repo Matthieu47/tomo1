@@ -2,7 +2,7 @@
 # define _MY_H
 
 enum value {LIBRE, BLANC, NOIR};
-enum bool {FALSE, TRUE};
+enum bool {FALSE, TRUE, NON_VISITE};
 
 typedef struct sGrille{
     int nb_Lig;  // n
