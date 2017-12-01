@@ -8,26 +8,30 @@ static int my_err(char *msg){
 }
 
 int main(int ac, char **av){
-  tGrille *grille;
+    tGrille *grille;
+    int ligne;
+    
+    if (ac<2)
+	return my_err("Usage : ./Tomo file");
+    grille = init_grille(av[1]);
+    if (grille == NULL)
+	return my_err("Grille init failed");
 
-  if (ac<2)
-    return my_err("Usage : ./Tomo file");
-  grille = init_grille(av[1]);
-  if (grille == NULL)
-    return my_err("Grille init failed");
+//test avant remplissage
+    for (ligne = 0 ; ligne < grille->nb_Lig ; ligne++){
+	if (TestVecteurLigne(grille, ligne) == TRUE)
+	    printf("Possible ligne %d\n", ligne);
+	else
+	    printf("Imossible\n");
+    }
+    
+    int ret =  enumeration(grille, 0, BLANC);
+    int ret2 = enumeration(grille, 0, NOIR);
+  
+    showGrille(grille);
 
-  if (TestVecteurLigne(grille, 2) == TRUE)
-    printf("Possible\n");
-  else
-    printf("Imossible\n");
-  
-  /* int ret =  enumeration(grille, 0, BLANC); */
-  /* int ret2 = enumeration(grille, 0, NOIR); */
-  
-  /* showGrille(grille); */
-  
-  /* if(ret == FALSE && ret2 == FALSE) */
-  /*   return my_err("Pas pu colorier =("); */
-  return 0;
+    /* if(ret == FALSE && ret2 == FALSE) */
+    /*   return my_err("Pas pu colorier =("); */
+    return 0;
 }
 

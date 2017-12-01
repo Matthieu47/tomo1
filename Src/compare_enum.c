@@ -135,7 +135,7 @@ int compare_seq_col(tGrille *grille, int col){
 int enumeration(tGrille *grille, int k_case, int c_color){
   int ok, raz, i, j;
 
-  printf("Enum k %d, color %d\n", k_case, c_color);
+  /* printf("Enum k %d, color %d\n", k_case, c_color); */
   i=k_case/grille->nb_Col;
   j=k_case%grille->nb_Col;
   // printf("i = %d et j = %d\n", i, j);

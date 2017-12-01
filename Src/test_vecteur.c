@@ -21,36 +21,28 @@ int TestSiAucunColonne (tGrille *grille, int colonne, int j1, int j2, int couleu
   return TRUE;
 }
 
-int TestVecteurLigne(tGrille *grille,int ligne){
-  /* init données necessaires */
-  int **TT;
-  int i, n, nb_seq;
 
-  nb_seq = nb_seqLig(ligne,grille);
-  TT = malloc(sizeof(int*) * nb_seq);
-  for (i=0; i<nb_seq ; i++){
-    TT[i] = malloc(sizeof(int) * grille->nb_Col);
-    for (n=0; n<grille->nb_Col ; n++)
-      TT[i][n] = NON_VISITE;
-  }
-  return (TestVecteurLigne_Rec(grille, ligne, grille->nb_Col, nb_seq, TT));
-}
 
 //vecteur V = ligne de la matrice
 // taille : nb_col
 //1er appel : l=nb sequences pour ligne, TT init a NON_VISITE de taille [nb_col][l], 
-int TestVecteurLigne_Rec (tGrille *grille, int ligne, int j, int l, int ** TT){
+int TestVecteurLigne_Rec(tGrille *grille, int ligne, int j, int l, int ** TT){
   int c1, c2;
 
+  /* printf("call ligne %d : j %d l %d\n", ligne, j, l); */
   if(l == 0)
     return TestSiAucunLigne(grille, ligne,0,j,NOIR);
+  /* printf("la\n"); */
   if(l==1 && j==grille->seqLig[ligne][l] - 1)
     return TestSiAucunLigne(grille, ligne, 0, j, BLANC);
+  /* printf("oups\n"); */
   if(j <= grille->seqLig[ligne][l]-1)
     return FALSE;
+  /* printf("wow %d %d\n", j, l); */
   if(TT[j][l] != NON_VISITE)
     return TT[j][l];
-
+  /* printf("ici\n"); */
+  
   if(grille->matrice[ligne][j] == NOIR)
     c1 = FALSE;
   else
@@ -66,8 +58,38 @@ int TestVecteurLigne_Rec (tGrille *grille, int ligne, int j, int l, int ** TT){
   }
 
   TT[j][l] = c1|c2;
+  
   return TT[j][l];
   
+}
+
+int TestVecteurLigne(tGrille *grille, int ligne){
+    /* init données necessaires */
+    int **TT;
+    int i, n, nb_seq,res;
+
+    nb_seq = nb_seqLig(ligne,grille);
+    if (nb_seq == 0)
+	return TRUE;
+    /* TT = malloc(sizeof(int*) * nb_seq); */
+    /* printf("TT : %d %d  \n", nb_seq, grille->nb_Col); */
+    /* for (i=0; i<nb_seq ; i++){ */
+    /* 	TT[i] = malloc(sizeof(int) * grille->nb_Col); */
+    /* 	for (n=0; n<grille->nb_Col ; n++){ */
+    /* 	    TT[i][n] = NON_VISITE; */
+    /* 	} */
+    /* } */
+    TT = malloc(sizeof(int*) * grille->nb_Col);
+    /* printf("TT : %d %d  \n", nb_seq, grille->nb_Col); */
+    for (i=0; i<grille->nb_Col ; i++){
+	TT[i] = malloc(sizeof(int) * nb_seq);
+	for (n=0; n<nb_seq ; n++){
+	    TT[i][n] = NON_VISITE;
+	}
+    }
+    res = TestVecteurLigne_Rec(grille, ligne, grille->nb_Col -1, nb_seq -1, TT);
+    
+    return res;
 }
 
 /* int TestVecteurColonne_Rec(){ */
