@@ -44,7 +44,7 @@ int nb_seqLig(int ligne, tGrille *grille){
 int nb_seqCol(int col, tGrille *grille){
   int i = 0;
 
-  while (grille->seqLig[col][i] != -1)
+  while (grille->seqCol[col][i] != -1)
     i++;
   return i;
 }

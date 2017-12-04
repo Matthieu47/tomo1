@@ -1,0 +1,23 @@
+#include "my.h"
+
+int PropagLigne (tGrille *grille, int i, vecteur marque, int nb){
+  int j;
+  int c1, c2;
+  int cptcolor = 0;
+  nb = 0;
+
+  for (j=0; j<m; j++){
+    if (grille->matrice[i][j] == 0){
+      grille->matrice[i][j] = 1;
+      c1 = TestVecteurLigne(grille, i);
+      grille->matrice[i][j] = 2;
+      c2 = TestVecteurLigne(grille, i);
+      grille->matrice[i][j] = 0;
+
+      //Si le coloriage de la case est impossible, on retourne faux
+      if (!c1 && !c2){
+	return FALSE;
+      }
+    }
+  }
+}
