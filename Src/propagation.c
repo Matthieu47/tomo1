@@ -19,11 +19,11 @@ int PropagLigne (tGrille *grille, int i, int *marqueC, int *pNb){
 	  c2 = TestVecteurLigne(grille, i);
 	  grille->matrice[i][j] = LIBRE;
 
-	  printf("colo case %d %d\n", i, j);
+	  /* printf("colo case %d %d\n", i, j); */
 	  //Si le coloriage de la case est impossible, on retourne faux
 	  if (!c1 && !c2)
 	    {
-	      printf("colo impossible case %d %d\n", i, j);
+	      /* printf("colo impossible case %d %d\n", i, j); */
 	      return FALSE;
 	    }
 
@@ -69,7 +69,7 @@ int PropagCol (tGrille *grille, int i, int *marqueL, int *pNb){
       c2 = TestVecteurCol(grille, j);
       grille->matrice[j][i] = 0;
 
-      printf("colo case %d %d\n", i, j);
+      /* printf("colo case %d %d\n", i, j); */
       //Si le coloriage de la case est impossible, on retourne faux
       if (!c1 && !c2){
 	return FALSE;

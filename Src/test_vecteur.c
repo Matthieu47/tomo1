@@ -32,11 +32,11 @@ int TestVecteurLigne_Rec(tGrille *grille, int ligne, int j, int l, int ** TT){
   int c1, c2;
 
   //   printf("call ligne %d : j %d l %d\n", ligne, j, l); 
-  if(l == 0)
+  if (l == 0)
     return TestSiAucunLigne(grille, ligne,0,j,NOIR);
   /* printf("la\n"); */
   if(l==1 && j==grille->seqLig[ligne][l-1] - 1){
-    printf("oups\n"); 
+    /* printf("oups\n");  */
     return TestSiAucunLigne(grille, ligne, 0, j, BLANC);
 
   }
@@ -47,7 +47,6 @@ int TestVecteurLigne_Rec(tGrille *grille, int ligne, int j, int l, int ** TT){
     return TT[j][l-1];
   /* printf("ici\n"); */
 
-  printf("aa\n");
   if(grille->matrice[ligne][j] == NOIR)
     c1 = FALSE;
   else{
@@ -162,7 +161,7 @@ int TestVecteurCol(tGrille *grille, int col){
     /* } */
     TT = malloc(sizeof(int*) * grille->nb_Lig);
     /* printf("TT : %d %d  \n", nb_seq, grille->nb_Col); */
-    for (i=0; i<grille->nb_Col ; i++){
+    for (i=0; i<grille->nb_Lig ; i++){
 	TT[i] = malloc(sizeof(int) * nb_seq);
 	for (n=0; n<nb_seq ; n++){
 	    TT[i][n] = NON_VISITE;
