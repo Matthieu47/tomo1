@@ -50,7 +50,7 @@ int main(int ac, char **av){
     
     /* printf("\n\n\t\tAVANT PROPAGATION\n"); */
     /* showGrille(grille); */
-    /* propagation(grille); */
+        propagation(grille); 
     /* printf("\n\n\t\tAPRES PROPAGATION\n"); */
     /* showGrille(grille); */
     
