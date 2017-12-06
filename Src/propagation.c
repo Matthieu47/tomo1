@@ -19,11 +19,9 @@ int PropagLigne (tGrille *grille, int i, int *marqueC, int *pNb){
 	  c2 = TestVecteurLigne(grille, i);
 	  grille->matrice[i][j] = LIBRE;
 
-	  /* printf("colo case %d %d\n", i, j); */
 	  //Si le coloriage de la case est impossible, on retourne faux
 	  if (!c1 && !c2)
 	    {
-	      /* printf("colo impossible case %d %d\n", i, j); */
 	      return FALSE;
 	    }
 
@@ -38,7 +36,8 @@ int PropagLigne (tGrille *grille, int i, int *marqueC, int *pNb){
 		  nb++;		  
 		}
 	    }
-	
+
+	  //Si le coloriage de la case en noir aboutit a un coloriage de ligne valide
 	  if(!c1 && c2)
 	    {
 	      grille->matrice[i][j] = NOIR;
@@ -69,13 +68,12 @@ int PropagCol (tGrille *grille, int i, int *marqueL, int *pNb){
       c2 = TestVecteurCol(grille, j);
       grille->matrice[j][i] = 0;
 
-      /* printf("colo case %d %d\n", i, j); */
       //Si le coloriage de la case est impossible, on retourne faux
       if (!c1 && !c2){
 	return FALSE;
       }
 
-      //Si le coloriage de la case en blanc aboutit a un coloriage de ligne valide
+      //Si le coloriage de la case en blanc aboutit a un coloriage de colonne valide
       if (c1 && !c2){
 	grille->matrice[j][i] = 1;
 	cptcolor++;
@@ -85,7 +83,7 @@ int PropagCol (tGrille *grille, int i, int *marqueL, int *pNb){
 	}
       }
 
-      
+      //Si le coloriage de la case en noir aboutit a un coloriage de colonne valide
       if(!c1 && c2){
 	grille->matrice[j][i] = 2;
 	cptcolor++;
@@ -126,15 +124,13 @@ int propagation(tGrille *grille){
 	    nbmC += nb;
 	    marqueL[i] = FALSE;
 	    nbmL --;
-	    printf("ok %d, nb %d\n", ok, nb);
 	  }
-	  /* printf("yay\n"); */
 	  i++;
 	}
-      
+      /*
       printf("apres propagLigne\n");
       showGrille(grille);
-      
+      */
       j=0;
       while (ok && j<grille->nb_Col)
 	{
@@ -143,13 +139,13 @@ int propagation(tGrille *grille){
 	    nbmL += nb;
 	    marqueC[j] = FALSE;
 	    nbmC--; // erreur énoncé ??
-	    /* printf("mrh\n"); */
 	  }
-	  /* printf("yoy\n"); */
 	  j++;
 	}
+      /*
       printf("apres propagCol\n");
       showGrille(grille);
+      */
     }
   return ok;
   

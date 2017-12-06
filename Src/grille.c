@@ -18,15 +18,24 @@ static void show_seq(int **sequence, int size, char type){
     }
 }
 
+/* Pour afficher l'etat de la grille et l'ensemble l'ensemble des sequences pour les lignes et les colonnes */
+void showWholeGrille(tGrille *grille){
+  int i,n;
+  printf("Matrice a %d lignes, %d colonnes :\n", grille->nb_Lig, grille->nb_Col); 
+  for (i=0 ; i<grille->nb_Lig ; i++){
+  	for (n=0 ; n<grille->nb_Col ; n++)
+  	    printf("%d ", grille->matrice[i][n]);
+  	printf("\n");
+  }
+  printf("\nLignes:\n");
+  show_seq(grille->seqLig, grille->nb_Lig, 'L');
+  printf("\nColonnes:\n");
+  show_seq(grille->seqCol, grille->nb_Col, 'C');
+}
+
+/* Pour afficher l'etat de la grille */
 void showGrille(tGrille *grille){
   int i,n;
-  /* printf("\tMatrice a %d lignes, %d colonnes :\n", grille->nb_Lig, grille->nb_Col); */
-  /* for (i=0 ; i<grille->nb_Lig ; i++){ */
-  /* 	for (n=0 ; n<grille->nb_Col ; n++) */
-  /* 	    printf("%d ", grille->matrice[i][n]); */
-  /* 	printf("\n"); */
-  /* } */
-
   for (i=0 ; i<grille->nb_Lig ; i++){
     for (n=0 ; n<grille->nb_Col ; n++)
       if (grille->matrice[i][n] == NOIR)
@@ -35,10 +44,6 @@ void showGrille(tGrille *grille){
 	printf(" ");
     printf("\n");
   }
-  /* printf("\nLignes:\n"); */
-  /* show_seq(grille->seqLig, grille->nb_Lig, 'L'); */
-  /* printf("\nColonnes:\n"); */
-  /* show_seq(grille->seqCol, grille->nb_Col, 'C'); */
 }
 
 /* GETTER */
@@ -97,6 +102,5 @@ tGrille *init_grille(char *file){
     init_seq(f, grille->seqLig, grille->nb_Lig);    
     init_seq(f, grille->seqCol, grille->nb_Col);
     fclose(f);
-    /* showGrille(grille); */
     return grille;
 }

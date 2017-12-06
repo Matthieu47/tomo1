@@ -6,9 +6,9 @@ long int demarrer_chrono() {
   return clock();
 }
 
-void stop_chrono(long int top_chrono) {
+void stop_chrono(long int top_chrono, char *fct) {
   long int arret_chrono = clock();
-  fprintf(stderr, "Le calcul a pris %f secondes.\n",
+  fprintf(stderr, "Le calcul de %s a pris %f secondes.\n", fct,
 	  (float)(arret_chrono - top_chrono) / CLOCKS_PER_SEC);
 }
  
@@ -28,6 +28,10 @@ int main(int ac, char **av){
     if (grille == NULL)
 	return my_err("Grille init failed");
 
+
+    showWholeGrille(grille);
+    
+    //Pour avoir un coloriage impossible sur l'instance 0.tom
     /* grille->matrice[0][1] = 2; */
     /* grille->matrice[0][2] = 1; */
     /* grille->matrice[2][2] = 2; */
@@ -35,8 +39,8 @@ int main(int ac, char **av){
     //    printf("%d\n", TestVecteurLigne(grille, 0));
     //    printf("%d\n", TestVecteurCol(grille, 0));    
     
-    //test avant remplissage   
 
+    //TEST DE TEST VECTEUR
     /* top_chrono = demarrer_chrono(); */
     /* for (ligne = 0 ; ligne < grille->nb_Lig ; ligne++){ */
     /* 	if (!TestVecteurLigne(grille, ligne) == TRUE) */
@@ -46,24 +50,30 @@ int main(int ac, char **av){
     /* 	if (!TestVecteurCol(grille, col) == TRUE) */
     /* 	  return my_err("Coloriage impossible colonne\n"); */
     /* } */
-    /* stop_chrono(top_chrono); */
+    /* stop_chrono(top_chrono, "test_vecteur"); */
+
+    //TEST DE PROPAGATION
     
-    /* printf("\n\n\t\tAVANT PROPAGATION\n"); */
-    /* showGrille(grille); */
-        propagation(grille); 
-    /* printf("\n\n\t\tAPRES PROPAGATION\n"); */
-    /* showGrille(grille); */
+    printf("\n\n\t\tAVANT PROPAGATION\n");
+    showGrille(grille);
+    top_chrono = demarrer_chrono();
+    propagation(grille);
+    stop_chrono(top_chrono, "propagation");
+    printf("\n\n\t\tAPRES PROPAGATION\n");
+
+    // TEST DE ENUMERATION
+    showGrille(grille); 
     
     top_chrono = demarrer_chrono();
     int ret =  enumeration(grille, 0, BLANC);
     int ret2 = enumeration(grille, 0, NOIR);
-    stop_chrono(top_chrono);
+    stop_chrono(top_chrono, "enumeration");
     
-    /* printf("\n\n\t\tAPRES ENUMERATION\n"); */
-    /* showGrille(grille); */
+    printf("\n\n\t\tAPRES ENUMERATION\n"); 
+    showGrille(grille);
 
-    /* if(ret == FALSE && ret2 == FALSE) */
-    /*   return my_err("Pas pu colorier =("); */
+    if(ret == FALSE && ret2 == FALSE) 
+       return my_err("Pas pu colorier =("); 
     return 0;
 }
 
