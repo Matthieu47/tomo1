@@ -29,7 +29,7 @@ int TestSiAucunColonne (tGrille *grille, int colonne, int j1, int j2, int couleu
 int TestVecteurLigne_Rec(tGrille *grille, int ligne, int j, int l, int ** TT){
   int c1, c2;
 
-  //   printf("call ligne %d : j %d l %d\n", ligne, j, l); 
+  //  printf("call ligne %d : j %d l %d\n", ligne, j, l); 
   if (l == 0)
     return TestSiAucunLigne(grille, ligne,0,j,NOIR);
   if(l==1 && j==grille->seqLig[ligne][l-1] - 1){
@@ -67,8 +67,9 @@ int TestVecteurLigne(tGrille *grille, int ligne){
     int i, n, nb_seq,res;
 
     nb_seq = nb_seqLig(ligne,grille);
-    if (nb_seq == 0)
-	return TRUE;
+    //Pour tester sur un vecteur
+    /* if (nb_seq == 0) */
+    /* 	return TRUE;  */
     TT = malloc(sizeof(int*) * grille->nb_Col);
     for (i=0; i<grille->nb_Col ; i++){
 	TT[i] = malloc(sizeof(int) * nb_seq);
@@ -128,8 +129,9 @@ int TestVecteurCol(tGrille *grille, int col){
     int i, n, nb_seq,res;
 
     nb_seq = nb_seqCol(col,grille);
-    if (nb_seq == 0)
-	return TRUE;
+    //Pour tester sur un vecteur
+    /* if (nb_seq == 0) */
+    /* 	return TRUE; */
     TT = malloc(sizeof(int*) * grille->nb_Lig);
     for (i=0; i<grille->nb_Lig ; i++){
 	TT[i] = malloc(sizeof(int) * nb_seq);
