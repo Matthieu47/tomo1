@@ -76,8 +76,8 @@ int main(int ac, char **av){
   /* float timer = (float)(arret_chrono - top_chrono) / CLOCKS_PER_SEC; */
   /* printf("%d %f %f\n", nbcase, (float)nb_colo(grille)/(float)nbcase * 100, timer); */
   /* stop_chrono(top_chrono, "propagation"); */
-  /* printf("\n\n\t\tAPRES PROPAGATION\n"); */
-  /* showGrille(grille); */
+  printf("\n\n\t\tAPRES PROPAGATION\n");
+  showGrille(grille);
 
   
   // TEST DE ENUMERATION
@@ -90,7 +90,7 @@ int main(int ac, char **av){
   showGrille(grille);
 
 
-  /* sleep(3); */
+  sleep(3);
   
   /* if(ret == FALSE && ret2 == FALSE) */
   /*    return my_err("Pas pu colorier =("); */
