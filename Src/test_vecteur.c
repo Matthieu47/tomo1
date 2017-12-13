@@ -27,25 +27,31 @@ int TestSiAucunColonne (tGrille *grille, int colonne, int j1, int j2, int couleu
 // taille : nb_col
 //1er appel : l=nb sequences pour ligne, TT init a NON_VISITE de taille [nb_col][l], 
 int TestVecteurLigne_Rec(tGrille *grille, int ligne, int j, int l, int ** TT){
+  //c1 : blanc, c2 : noir
   int c1, c2;
 
-  //  printf("call ligne %d : j %d l %d\n", ligne, j, l); 
+  //  printf("call ligne %d : j %d l %d\n", ligne, j, l);
   if (l == 0)
     return TestSiAucunLigne(grille, ligne,0,j,NOIR);
+  // une seq + nb de case dispo pile
   if(l==1 && j==grille->seqLig[ligne][l-1] - 1){
     return TestSiAucunLigne(grille, ligne, 0, j, BLANC);
-
   }
+
+  // pas assez de place
   if(j <= grille->seqLig[ligne][l-1]-1)
     return FALSE;
+  // case deja visitée
   if(TT[j][l-1] != NON_VISITE)
     return TT[j][l-1];
 
+  
   if(grille->matrice[ligne][j] == NOIR)
     c1 = FALSE;
   else{
     c1 = TestVecteurLigne_Rec(grille, ligne, j-1, l, TT);
   }
+
   if(!TestSiAucunLigne(grille, ligne, j - grille->seqLig[ligne][l-1] + 1, j, BLANC))
     c2 = FALSE;
   else{
@@ -67,9 +73,13 @@ int TestVecteurLigne(tGrille *grille, int ligne){
     int i, n, nb_seq,res;
 
     nb_seq = nb_seqLig(ligne,grille);
+
     //Pour tester sur un vecteur
-    /* if (nb_seq == 0) */
-    /* 	return TRUE;  */
+    if (nb_seq == 0)
+    	return TRUE;
+
+
+
     TT = malloc(sizeof(int*) * grille->nb_Col);
     for (i=0; i<grille->nb_Col ; i++){
 	TT[i] = malloc(sizeof(int) * nb_seq);
@@ -129,9 +139,14 @@ int TestVecteurCol(tGrille *grille, int col){
     int i, n, nb_seq,res;
 
     nb_seq = nb_seqCol(col,grille);
+
+
     //Pour tester sur un vecteur
-    /* if (nb_seq == 0) */
-    /* 	return TRUE; */
+    if (nb_seq == 0)
+    	return TRUE;
+
+
+
     TT = malloc(sizeof(int*) * grille->nb_Lig);
     for (i=0; i<grille->nb_Lig ; i++){
 	TT[i] = malloc(sizeof(int) * nb_seq);

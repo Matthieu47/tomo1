@@ -39,12 +39,12 @@ void showGrille(tGrille *grille){
   for (i=0 ; i<grille->nb_Lig ; i++){
     for (n=0 ; n<grille->nb_Col ; n++)
       if (grille->matrice[i][n] == NOIR)
-	printf("X");
+	  printf(" ");
       else
 	if(grille->matrice[i][n] == BLANC)
-	  printf("O");
+	printf("█");
 	else
-	  printf("N");
+	  printf("_");
     printf("\n");
   }
 }
